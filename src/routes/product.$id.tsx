@@ -180,7 +180,7 @@ function ProductDetail() {
       {zoom && (
         <button
           onClick={() => setZoom(null)}
-          className="fixed inset-0 z-50 grid place-items-center bg-foreground/90 p-8"
+          className="fixed inset-0 z-50 grid place-items-center bg-background/95 p-8"
         >
           <img src={zoom} alt="" className="max-h-full max-w-full object-contain" />
         </button>
@@ -349,7 +349,7 @@ function ChatPanel({
   const [text, setText] = useState("");
   return (
     <div className="fixed inset-0 z-40">
-      <button className="absolute inset-0 bg-foreground/30" onClick={onClose} aria-label="Close" />
+      <button className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={onClose} aria-label="Close" />
       <aside className="absolute right-0 top-0 flex h-full w-full max-w-md flex-col border-l hairline bg-background">
         <div className="flex items-start justify-between gap-4 border-b hairline p-6">
           <div>

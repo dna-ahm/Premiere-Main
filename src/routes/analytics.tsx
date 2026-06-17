@@ -61,17 +61,26 @@ function Analytics() {
             <div className="h-64">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={statusCounts}>
-                  <CartesianGrid stroke="oklch(0.9 0.005 80)" vertical={false} />
-                  <XAxis dataKey="status" tick={{ fontSize: 12 }} stroke="oklch(0.5 0 0)" />
-                  <YAxis tick={{ fontSize: 11 }} stroke="oklch(0.5 0 0)" />
+                  <defs>
+                    <linearGradient id="limeBar" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor="#B8FF3C" stopOpacity={1} />
+                      <stop offset="100%" stopColor="#B8FF3C" stopOpacity={0.25} />
+                    </linearGradient>
+                  </defs>
+                  <CartesianGrid stroke="#1E2235" vertical={false} />
+                  <XAxis dataKey="status" tick={{ fontSize: 12, fill: "#8A8FA8" }} stroke="#1E2235" />
+                  <YAxis tick={{ fontSize: 11, fill: "#8A8FA8" }} stroke="#1E2235" />
                   <Tooltip
+                    cursor={{ fill: "rgba(184,255,60,0.08)" }}
                     contentStyle={{
-                      background: "white",
-                      border: "1px solid oklch(0.9 0.005 80)",
+                      background: "#0D1120",
+                      border: "1px solid #1E2235",
+                      borderRadius: 10,
                       fontSize: 12,
+                      color: "#F4F6FB",
                     }}
                   />
-                  <Bar dataKey="count" fill="oklch(0.2 0.01 60)" radius={[2, 2, 0, 0]} />
+                  <Bar dataKey="count" fill="url(#limeBar)" radius={[6, 6, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </div>
@@ -91,28 +100,31 @@ function Analytics() {
             <div className="h-64">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={byCollection}>
-                  <CartesianGrid stroke="oklch(0.9 0.005 80)" vertical={false} />
-                  <XAxis dataKey="collection" tick={{ fontSize: 12 }} stroke="oklch(0.5 0 0)" />
-                  <YAxis tick={{ fontSize: 11 }} stroke="oklch(0.5 0 0)" />
+                  <CartesianGrid stroke="#1E2235" vertical={false} />
+                  <XAxis dataKey="collection" tick={{ fontSize: 12, fill: "#8A8FA8" }} stroke="#1E2235" />
+                  <YAxis tick={{ fontSize: 11, fill: "#8A8FA8" }} stroke="#1E2235" />
                   <Tooltip
+                    cursor={{ fill: "rgba(184,255,60,0.08)" }}
                     contentStyle={{
-                      background: "white",
-                      border: "1px solid oklch(0.9 0.005 80)",
+                      background: "#0D1120",
+                      border: "1px solid #1E2235",
+                      borderRadius: 10,
                       fontSize: 12,
+                      color: "#F4F6FB",
                     }}
                   />
-                  <Bar dataKey="OK" stackId="a" fill="oklch(0.65 0.13 150)" />
-                  <Bar dataKey="Target" stackId="a" fill="oklch(0.78 0.14 75)" />
-                  <Bar dataKey="GoProd" stackId="a" fill="oklch(0.7 0.13 280)" />
-                  <Bar dataKey="KO" stackId="a" fill="oklch(0.6 0.2 25)" />
+                  <Bar dataKey="OK" stackId="a" fill="#B8FF3C" />
+                  <Bar dataKey="Target" stackId="a" fill="#FFC857" />
+                  <Bar dataKey="GoProd" stackId="a" fill="#7BB8FF" />
+                  <Bar dataKey="KO" stackId="a" fill="#FF5C7A" />
                 </BarChart>
               </ResponsiveContainer>
             </div>
             <div className="mt-4 flex flex-wrap gap-3 text-[10px] tracking-luxury text-muted-foreground">
-              <Swatch color="oklch(0.65 0.13 150)" label="OK" />
-              <Swatch color="oklch(0.78 0.14 75)" label="Target ▲" />
-              <Swatch color="oklch(0.7 0.13 280)" label="GoProd Δ" />
-              <Swatch color="oklch(0.6 0.2 25)" label="KO" />
+              <Swatch color="#B8FF3C" label="OK" />
+              <Swatch color="#FFC857" label="Target ▲" />
+              <Swatch color="#7BB8FF" label="GoProd Δ" />
+              <Swatch color="#FF5C7A" label="KO" />
             </div>
           </Card>
         </section>
@@ -131,7 +143,7 @@ function Analytics() {
             {alerts.map(({ product, row }) => (
               <li key={`${product.id}-${row.id}`} className="flex items-center justify-between gap-6 py-5">
                 <div className="flex items-center gap-4">
-                  <span className="grid h-10 w-10 place-items-center bg-[oklch(0.96_0.05_25)] font-mono text-[oklch(0.45_0.18_25)]">
+                  <span className="grid h-10 w-10 place-items-center rounded-full border border-[color-mix(in_oklab,var(--danger)_40%,transparent)] bg-[color-mix(in_oklab,var(--danger)_14%,transparent)] font-mono text-[var(--danger)]">
                     X
                   </span>
                   <div>
@@ -145,7 +157,7 @@ function Analytics() {
                 <Link
                   to="/product/$id"
                   params={{ id: product.id }}
-                  className="rounded-sm border hairline px-4 py-2 text-[11px] tracking-luxury hover:bg-muted"
+                  className="rounded-full border hairline px-4 py-2 text-[11px] tracking-luxury hover:bg-muted"
                 >
                   Resolve →
                 </Link>
@@ -158,6 +170,7 @@ function Analytics() {
             )}
           </ul>
         </section>
+
       </main>
       <Footer />
     </div>
