@@ -46,12 +46,20 @@ function ProductDetail() {
     <div className="min-h-screen bg-background">
       <Nav />
       <main className="mx-auto max-w-[1400px] px-8 py-12">
-        <Link
-          to="/library"
-          className="tracking-luxury text-[10px] text-muted-foreground hover:text-foreground"
-        >
-          ← Back to library
-        </Link>
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <Link
+            to="/library"
+            className="tracking-luxury text-[10px] text-muted-foreground hover:text-foreground"
+          >
+            ← Back to library
+          </Link>
+          <Link
+            to="/add"
+            className="rounded-sm bg-primary px-5 py-3 text-[11px] tracking-luxury text-primary-foreground hover:glow-lime"
+          >
+            + Add Product
+          </Link>
+        </div>
 
         <header className="mt-6 grid gap-10 border-b hairline pb-12 md:grid-cols-[1fr_1.3fr]">
           <div className="aspect-[4/5] overflow-hidden bg-muted">
