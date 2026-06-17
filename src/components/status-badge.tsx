@@ -2,10 +2,14 @@ import { STATUS_META, type StatusCode } from "@/lib/mock-data";
 import { cn } from "@/lib/utils";
 
 const toneClass: Record<string, string> = {
-  success: "bg-[oklch(0.96_0.04_150)] text-[oklch(0.4_0.12_150)] border-[oklch(0.85_0.06_150)]",
-  warning: "bg-[oklch(0.97_0.05_75)] text-[oklch(0.45_0.12_75)] border-[oklch(0.88_0.08_75)]",
-  danger: "bg-[oklch(0.96_0.05_25)] text-[oklch(0.45_0.18_25)] border-[oklch(0.85_0.1_25)]",
-  pending: "bg-[oklch(0.96_0.04_280)] text-[oklch(0.45_0.15_280)] border-[oklch(0.85_0.08_280)]",
+  success:
+    "bg-[color-mix(in_oklab,var(--lime)_14%,transparent)] text-[var(--lime)] border-[color-mix(in_oklab,var(--lime)_35%,transparent)]",
+  warning:
+    "bg-[color-mix(in_oklab,var(--warning)_12%,transparent)] text-[var(--warning)] border-[color-mix(in_oklab,var(--warning)_30%,transparent)]",
+  danger:
+    "bg-[color-mix(in_oklab,var(--danger)_14%,transparent)] text-[var(--danger)] border-[color-mix(in_oklab,var(--danger)_35%,transparent)]",
+  pending:
+    "bg-[color-mix(in_oklab,var(--pending)_14%,transparent)] text-[var(--pending)] border-[color-mix(in_oklab,var(--pending)_30%,transparent)]",
   muted: "bg-muted text-muted-foreground border-border",
 };
 
@@ -22,7 +26,7 @@ export function StatusPill({
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-2 rounded-sm border px-2.5 py-1 font-mono text-[11px]",
+        "inline-flex items-center gap-2 rounded-full border px-3 py-1 font-mono text-[11px] backdrop-blur",
         toneClass[m.tone],
         className,
       )}
@@ -40,7 +44,7 @@ export function GoBadge({ value, label }: { value: "GO" | "PENDING" | "KO"; labe
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-2 rounded-sm border px-2.5 py-1 text-[10px] tracking-luxury",
+        "inline-flex items-center gap-2 rounded-full border px-3 py-1 text-[10px] tracking-luxury",
         tone,
       )}
     >

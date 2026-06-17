@@ -39,7 +39,7 @@ export function Nav() {
             <div className="font-serif text-sm leading-tight">Management</div>
             <div className="text-[10px] text-muted-foreground">Atelier · Paris</div>
           </div>
-          <div className="grid h-9 w-9 place-items-center rounded-full bg-foreground text-[11px] font-medium text-background">
+          <div className="grid h-9 w-9 place-items-center rounded-full bg-foreground text-[11px] font-medium text-primary-foreground">
             PM
           </div>
         </div>

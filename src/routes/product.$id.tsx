@@ -34,7 +34,7 @@ export const Route = createFileRoute("/product/$id")({
         <p className="mt-4 text-muted-foreground">This product could not be located.</p>
         <Link
           to="/library"
-          className="mt-8 inline-block rounded-sm border border-foreground bg-foreground px-5 py-3 text-[11px] tracking-luxury text-background"
+          className="mt-8 inline-block rounded-sm bg-primary px-5 py-3 text-[11px] tracking-luxury text-primary-foreground"
         >
           Back to library
         </Link>
@@ -180,7 +180,7 @@ function ProductDetail() {
       {zoom && (
         <button
           onClick={() => setZoom(null)}
-          className="fixed inset-0 z-50 grid place-items-center bg-foreground/90 p-8"
+          className="fixed inset-0 z-50 grid place-items-center bg-background/95 p-8"
         >
           <img src={zoom} alt="" className="max-h-full max-w-full object-contain" />
         </button>
@@ -263,7 +263,7 @@ function TableRow({
             <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
           </svg>
           {row.comments.length > 0 && (
-            <span className="absolute -right-1 -top-1 grid h-4 w-4 place-items-center rounded-full bg-foreground text-[9px] text-background">
+            <span className="absolute -right-1 -top-1 grid h-4 w-4 place-items-center rounded-full bg-foreground text-[9px] text-primary-foreground">
               {row.comments.length}
             </span>
           )}
@@ -349,7 +349,7 @@ function ChatPanel({
   const [text, setText] = useState("");
   return (
     <div className="fixed inset-0 z-40">
-      <button className="absolute inset-0 bg-foreground/30" onClick={onClose} aria-label="Close" />
+      <button className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={onClose} aria-label="Close" />
       <aside className="absolute right-0 top-0 flex h-full w-full max-w-md flex-col border-l hairline bg-background">
         <div className="flex items-start justify-between gap-4 border-b hairline p-6">
           <div>
@@ -393,7 +393,7 @@ function ChatPanel({
           />
           <button
             type="submit"
-            className="mt-3 w-full rounded-sm border border-foreground bg-foreground px-4 py-2.5 text-[11px] tracking-luxury text-background"
+            className="mt-3 w-full rounded-sm bg-primary px-4 py-2.5 text-[11px] tracking-luxury text-primary-foreground"
           >
             Send comment
           </button>

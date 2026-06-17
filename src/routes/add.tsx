@@ -45,7 +45,7 @@ function AddProduct() {
               key={t}
               onClick={() => setTab(t)}
               className={`px-6 py-2.5 text-[11px] tracking-luxury ${
-                tab === t ? "bg-foreground text-background" : "text-muted-foreground"
+                tab === t ? "bg-primary text-primary-foreground" : "text-muted-foreground"
               }`}
             >
               {t === "scan" ? "AI Scan" : "Manual Form"}
@@ -68,7 +68,7 @@ function AddProduct() {
                 <button
                   onClick={simulate}
                   disabled={scanning !== "idle"}
-                  className="mt-8 rounded-sm border border-foreground bg-foreground px-6 py-3 text-[11px] tracking-luxury text-background transition-opacity disabled:opacity-60"
+                  className="mt-8 rounded-sm bg-primary px-6 py-3 text-[11px] tracking-luxury text-primary-foreground transition-opacity disabled:opacity-60"
                 >
                   {scanning === "idle"
                     ? "Simulate Scan"
@@ -125,7 +125,7 @@ function AddProduct() {
             </Field>
             <button
               type="submit"
-              className="mt-4 w-fit rounded-sm border border-foreground bg-foreground px-6 py-3 text-[11px] tracking-luxury text-background"
+              className="mt-4 w-fit rounded-sm bg-primary px-6 py-3 text-[11px] tracking-luxury text-primary-foreground"
             >
               Initialize Technical Table →
             </button>

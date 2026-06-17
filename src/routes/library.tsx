@@ -51,7 +51,7 @@ function Library() {
           </div>
           <Link
             to="/add"
-            className="rounded-sm border border-foreground bg-foreground px-5 py-3 text-[11px] tracking-luxury text-background hover:bg-foreground/85"
+            className="rounded-sm bg-primary px-5 py-3 text-[11px] tracking-luxury text-primary-foreground hover:glow-lime"
           >
             + Add Product
           </Link>
@@ -74,7 +74,7 @@ function Library() {
               key={p.id}
               to="/product/$id"
               params={{ id: p.id }}
-              className="group flex flex-col bg-card transition-colors hover:bg-muted"
+              className="group flex flex-col rounded-2xl bg-card transition-all hover:glow-lime"
             >
               <div className="relative aspect-[4/5] overflow-hidden bg-muted">
                 <img
@@ -138,7 +138,7 @@ function Pills<T extends string>({
             onClick={() => onChange(o)}
             className={`px-3 py-2 text-[11px] tracking-wide transition-colors ${
               value === o
-                ? "bg-foreground text-background"
+                ? "bg-primary text-primary-foreground"
                 : "bg-card text-muted-foreground hover:text-foreground"
             }`}
           >
