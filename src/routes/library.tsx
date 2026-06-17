@@ -74,7 +74,7 @@ function Library() {
               key={p.id}
               to="/product/$id"
               params={{ id: p.id }}
-              className="group flex flex-col bg-card transition-colors hover:bg-muted"
+              className="group flex flex-col rounded-2xl bg-card transition-all hover:glow-lime"
             >
               <div className="relative aspect-[4/5] overflow-hidden bg-muted">
                 <img
