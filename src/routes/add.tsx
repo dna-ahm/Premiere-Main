@@ -1,7 +1,9 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import { SmartTable } from "@/components/smart-table";
 import { Nav, Footer } from "@/components/layout/nav";
 import { PRODUCTS } from "@/lib/mock-data";
+import { createSpecificationRows } from "@/lib/specification-rows";
 
 export const Route = createFileRoute("/add")({
   head: () => ({
@@ -15,16 +17,33 @@ export const Route = createFileRoute("/add")({
 
 function AddProduct() {
   const navigate = useNavigate();
+  const product = PRODUCTS[0];
   const [tab, setTab] = useState<"scan" | "manual">("scan");
   const [scanning, setScanning] = useState<"idle" | "loading" | "done">("idle");
+  const [showValidation, setShowValidation] = useState(false);
   const [form, setForm] = useState({ name: "", sku: "", site: "ARCO" });
+
+  const scannedRows = useMemo(
+    () => createSpecificationRows(product.rows),
+    [product.rows],
+  );
 
   const simulate = () => {
     setScanning("loading");
     setTimeout(() => {
       setScanning("done");
-      setTimeout(() => navigate({ to: "/product/$id", params: { id: PRODUCTS[0].id } }), 700);
+      setShowValidation(true);
     }, 1600);
+  };
+
+  const closeValidation = () => {
+    setShowValidation(false);
+    setScanning("idle");
+  };
+
+  const validateAndRedirect = () => {
+    setShowValidation(false);
+    navigate({ to: "/product/$id", params: { id: product.id } });
   };
 
   return (
@@ -74,7 +93,7 @@ function AddProduct() {
                     ? "Simulate Scan"
                     : scanning === "loading"
                       ? "Reading spreadsheet…"
-                      : "Done — redirecting"}
+                      : "Scan complete — review below"}
                 </button>
               </div>
             </div>
@@ -133,6 +152,58 @@ function AddProduct() {
         )}
       </main>
       <Footer />
+
+      {showValidation && (
+        <div className="fixed inset-0 z-50">
+          <button
+            type="button"
+            className="absolute inset-0 bg-background/80 backdrop-blur-sm"
+            onClick={closeValidation}
+            aria-label="Close"
+          />
+          <div className="absolute inset-4 flex flex-col overflow-hidden border hairline bg-background shadow-2xl sm:inset-8 md:inset-12">
+            <div className="flex shrink-0 items-start justify-between gap-4 border-b hairline p-6">
+              <div>
+                <div className="tracking-luxury text-[10px] text-muted-foreground">AI extraction</div>
+                <h2 className="mt-1 font-serif text-3xl">Validate extracted data</h2>
+                <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
+                  Review the smart table generated from the spreadsheet before creating the product
+                  technical sheet.
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={closeValidation}
+                className="text-xl text-muted-foreground hover:text-foreground"
+                aria-label="Close"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="min-h-0 flex-1 overflow-y-auto">
+              <SmartTable rows={scannedRows} readOnly />
+            </div>
+
+            <div className="flex shrink-0 items-center justify-end gap-3 border-t hairline p-6">
+              <button
+                type="button"
+                onClick={closeValidation}
+                className="rounded-sm border hairline px-6 py-3 text-[11px] tracking-luxury text-muted-foreground hover:bg-muted"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={validateAndRedirect}
+                className="rounded-sm bg-primary px-6 py-3 text-[11px] tracking-luxury text-primary-foreground"
+              >
+                Validate & open product →
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

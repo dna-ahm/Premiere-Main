@@ -16,6 +16,7 @@ export type CheckRow = {
   label: string;
   status: StatusCode;
   note?: string;
+  media?: string;
   updatedBy?: string;
   updatedAt?: string;
   comments: Comment[];
@@ -99,6 +100,7 @@ export const PRODUCTS: Product[] = [
             label: "Main POCHETTE",
             status: "ko",
             note: "Pattern misalignment at the flap",
+            media: "/media/checkpoints/cadrage-pochette-2.png",
             comments: [
               C("R. Allègre", "Pattern shifted 4mm at the flap seam — redo.", "5h"),
             ],
