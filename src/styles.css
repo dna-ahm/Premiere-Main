@@ -54,46 +54,46 @@
 :root {
   --radius: 12px;
 
-  /* Core palette */
-  --background: #05070F;
-  --foreground: #F4F6FB;
-  --card: #0D1120;
-  --surface-2: #11162A;
-  --card-foreground: #F4F6FB;
-  --popover: #0D1120;
-  --popover-foreground: #F4F6FB;
+  /* Core palette — light */
+  --background: #F5F6FA;
+  --foreground: #05070F;
+  --card: #FFFFFF;
+  --surface-2: #F0F2F8;
+  --card-foreground: #05070F;
+  --popover: #FFFFFF;
+  --popover-foreground: #05070F;
 
-  --primary: #B8FF3C;            /* neon lime */
+  --primary: #7BC832;
   --primary-foreground: #05070F;
-  --secondary: #11162A;
-  --secondary-foreground: #F4F6FB;
-  --muted: #11162A;
-  --muted-foreground: #8A8FA8;
-  --accent: #B8FF3C;
+  --secondary: #F0F2F8;
+  --secondary-foreground: #05070F;
+  --muted: #F0F2F8;
+  --muted-foreground: #6B7080;
+  --accent: #7BC832;
   --accent-foreground: #05070F;
 
-  --destructive: #FF5C7A;
-  --destructive-foreground: #05070F;
+  --destructive: #E5365A;
+  --destructive-foreground: #FFFFFF;
 
-  --border: #1E2235;
-  --input: #1E2235;
-  --ring: #B8FF3C;
+  --border: #E2E5EF;
+  --input: #E2E5EF;
+  --ring: #7BC832;
 
-  --lime: #B8FF3C;
-  --success: #B8FF3C;
-  --warning: #FFC857;
-  --danger: #FF5C7A;
-  --pending: #7BB8FF;
+  --lime: #7BC832;
+  --success: #5BA821;
+  --warning: #E0A02C;
+  --danger: #E5365A;
+  --pending: #3D8BE0;
 
-  --chart-1: #B8FF3C;
-  --chart-2: #FFC857;
-  --chart-3: #FF5C7A;
-  --chart-4: #7BB8FF;
-  --chart-5: #8A8FA8;
+  --chart-1: #7BC832;
+  --chart-2: #E0A02C;
+  --chart-3: #E5365A;
+  --chart-4: #3D8BE0;
+  --chart-5: #6B7080;
 }
 
 .dark {
-  /* same as root — app is dark-first */
+  /* app is light-first */
 }
 
 @layer base {
@@ -106,8 +106,8 @@
     font-family: var(--font-sans);
     font-feature-settings: "ss01", "cv11";
     background-image:
-      radial-gradient(900px 500px at 85% -10%, color-mix(in oklab, var(--lime) 12%, transparent), transparent 60%),
-      radial-gradient(700px 400px at -10% 110%, color-mix(in oklab, var(--lime) 6%, transparent), transparent 60%);
+      radial-gradient(900px 500px at 85% -10%, color-mix(in oklab, var(--lime) 14%, transparent), transparent 60%),
+      radial-gradient(700px 400px at -10% 110%, color-mix(in oklab, var(--lime) 8%, transparent), transparent 60%);
     background-attachment: fixed;
   }
   h1, h2, h3, h4, .font-serif {
@@ -118,7 +118,7 @@
   }
   h1 { font-weight: 700; letter-spacing: -0.035em; }
   ::selection { background: var(--lime); color: var(--background); }
-  input, select, textarea { color-scheme: dark; }
+  input, select, textarea { color-scheme: light; }
 }
 
 @utility hairline {
@@ -127,8 +127,9 @@
 
 @utility glow-lime {
   box-shadow:
-    0 0 0 1px color-mix(in oklab, var(--lime) 40%, transparent),
-    0 10px 40px -10px color-mix(in oklab, var(--lime) 35%, transparent);
+    0 0 0 1px color-mix(in oklab, var(--lime) 35%, transparent),
+    0 12px 32px -12px color-mix(in oklab, var(--lime) 45%, transparent),
+    0 4px 12px -4px rgba(5, 7, 15, 0.08);
 }
 
 @utility tracking-luxury {
