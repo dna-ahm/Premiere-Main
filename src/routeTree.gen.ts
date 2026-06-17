@@ -14,6 +14,8 @@ import { Route as AnalyticsRouteImport } from './routes/analytics'
 import { Route as AddRouteImport } from './routes/add'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProductIdRouteImport } from './routes/product.$id'
+import { Route as ProductIdIndexRouteImport } from './routes/product.$id.index'
+import { Route as ProductIdSpecificationsGateIdRouteImport } from './routes/product.$id.specifications.$gateId'
 
 const LibraryRoute = LibraryRouteImport.update({
   id: '/library',
@@ -40,20 +42,34 @@ const ProductIdRoute = ProductIdRouteImport.update({
   path: '/product/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProductIdIndexRoute = ProductIdIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ProductIdRoute,
+} as any)
+const ProductIdSpecificationsGateIdRoute =
+  ProductIdSpecificationsGateIdRouteImport.update({
+    id: '/specifications/$gateId',
+    path: '/specifications/$gateId',
+    getParentRoute: () => ProductIdRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/add': typeof AddRoute
   '/analytics': typeof AnalyticsRoute
   '/library': typeof LibraryRoute
-  '/product/$id': typeof ProductIdRoute
+  '/product/$id': typeof ProductIdRouteWithChildren
+  '/product/$id/': typeof ProductIdIndexRoute
+  '/product/$id/specifications/$gateId': typeof ProductIdSpecificationsGateIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/add': typeof AddRoute
   '/analytics': typeof AnalyticsRoute
   '/library': typeof LibraryRoute
-  '/product/$id': typeof ProductIdRoute
+  '/product/$id': typeof ProductIdIndexRoute
+  '/product/$id/specifications/$gateId': typeof ProductIdSpecificationsGateIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -61,14 +77,37 @@ export interface FileRoutesById {
   '/add': typeof AddRoute
   '/analytics': typeof AnalyticsRoute
   '/library': typeof LibraryRoute
-  '/product/$id': typeof ProductIdRoute
+  '/product/$id': typeof ProductIdRouteWithChildren
+  '/product/$id/': typeof ProductIdIndexRoute
+  '/product/$id/specifications/$gateId': typeof ProductIdSpecificationsGateIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/add' | '/analytics' | '/library' | '/product/$id'
+  fullPaths:
+    | '/'
+    | '/add'
+    | '/analytics'
+    | '/library'
+    | '/product/$id'
+    | '/product/$id/'
+    | '/product/$id/specifications/$gateId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/add' | '/analytics' | '/library' | '/product/$id'
-  id: '__root__' | '/' | '/add' | '/analytics' | '/library' | '/product/$id'
+  to:
+    | '/'
+    | '/add'
+    | '/analytics'
+    | '/library'
+    | '/product/$id'
+    | '/product/$id/specifications/$gateId'
+  id:
+    | '__root__'
+    | '/'
+    | '/add'
+    | '/analytics'
+    | '/library'
+    | '/product/$id'
+    | '/product/$id/'
+    | '/product/$id/specifications/$gateId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -76,7 +115,7 @@ export interface RootRouteChildren {
   AddRoute: typeof AddRoute
   AnalyticsRoute: typeof AnalyticsRoute
   LibraryRoute: typeof LibraryRoute
-  ProductIdRoute: typeof ProductIdRoute
+  ProductIdRoute: typeof ProductIdRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -116,16 +155,54 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProductIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/product/$id/': {
+      id: '/product/$id/'
+      path: '/'
+      fullPath: '/product/$id/'
+      preLoaderRoute: typeof ProductIdIndexRouteImport
+      parentRoute: typeof ProductIdRoute
+    }
+    '/product/$id/specifications/$gateId': {
+      id: '/product/$id/specifications/$gateId'
+      path: '/specifications/$gateId'
+      fullPath: '/product/$id/specifications/$gateId'
+      preLoaderRoute: typeof ProductIdSpecificationsGateIdRouteImport
+      parentRoute: typeof ProductIdRoute
+    }
   }
 }
+
+interface ProductIdRouteChildren {
+  ProductIdIndexRoute: typeof ProductIdIndexRoute
+  ProductIdSpecificationsGateIdRoute: typeof ProductIdSpecificationsGateIdRoute
+}
+
+const ProductIdRouteChildren: ProductIdRouteChildren = {
+  ProductIdIndexRoute: ProductIdIndexRoute,
+  ProductIdSpecificationsGateIdRoute: ProductIdSpecificationsGateIdRoute,
+}
+
+const ProductIdRouteWithChildren = ProductIdRoute._addFileChildren(
+  ProductIdRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AddRoute: AddRoute,
   AnalyticsRoute: AnalyticsRoute,
   LibraryRoute: LibraryRoute,
-  ProductIdRoute: ProductIdRoute,
+  ProductIdRoute: ProductIdRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
