@@ -16,9 +16,9 @@ export const Route = createFileRoute("/")({
 });
 
 const weatherTone = {
-  green: "bg-[oklch(0.85_0.1_150)] text-[oklch(0.3_0.1_150)]",
-  amber: "bg-[oklch(0.9_0.12_75)] text-[oklch(0.35_0.12_75)]",
-  red: "bg-[oklch(0.85_0.15_25)] text-[oklch(0.35_0.18_25)]",
+  green: "bg-[color-mix(in_oklab,var(--lime)_18%,transparent)] text-[var(--lime)]",
+  amber: "bg-[color-mix(in_oklab,var(--warning)_18%,transparent)] text-[var(--warning)]",
+  red: "bg-[color-mix(in_oklab,var(--danger)_18%,transparent)] text-[var(--danger)]",
 };
 
 function Dashboard() {
@@ -49,13 +49,13 @@ function Dashboard() {
             <div className="mt-8 flex gap-3">
               <Link
                 to="/library"
-                className="rounded-sm border border-foreground bg-foreground px-5 py-3 text-[11px] tracking-luxury text-background transition-colors hover:bg-foreground/85"
+                className="rounded-full bg-primary px-6 py-3 text-[11px] font-semibold tracking-luxury text-primary-foreground transition-all hover:glow-lime"
               >
                 Open Library
               </Link>
               <Link
                 to="/add"
-                className="rounded-sm border hairline px-5 py-3 text-[11px] tracking-luxury hover:bg-muted"
+                className="rounded-full border hairline px-6 py-3 text-[11px] tracking-luxury text-foreground hover:bg-muted"
               >
                 Add Product
               </Link>
@@ -136,7 +136,7 @@ function Metric({
 }) {
   return (
     <div
-      className={`border hairline p-6 ${emphasize ? "bg-foreground text-background" : "bg-card"}`}
+      className={`rounded-2xl border hairline p-6 ${emphasize ? "bg-primary text-primary-foreground" : "bg-card"}`}
     >
       <div className="font-serif text-5xl leading-none">{value}</div>
       <div className="mt-4 tracking-luxury text-[10px] opacity-80">{label}</div>
