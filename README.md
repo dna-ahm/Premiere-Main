@@ -3,6 +3,8 @@
 **Collection Development PLM**
  built during the **IFM × 42** hackathon.
 
+ > Available at: https://atelier-atelier.vercel.app
+
 Premiere Main is a product-lifecycle prototype for luxury houses. It connects the **Creative Studio** and the **Production Atelier** around a shared, visual source of truth: every prototype, every checkpoint, every GO / KO.
 
 <img width="1294" height="767" alt="Screenshot 2026-09-16 at 23 03 01" src="https://github.com/user-attachments/assets/49f08e0b-15bc-47a8-9e43-24b64d90a8cf" />
